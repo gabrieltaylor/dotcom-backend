@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :dotcom, Dotcom.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("PG_"),
+  password: System.get_env("PG_"),
   database: "dotcom_test",
-  hostname: "localhost",
+  hostname: System.get_env("PG_"),
   pool: Ecto.Adapters.SQL.Sandbox
