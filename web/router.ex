@@ -19,6 +19,8 @@ defmodule Dotcom.Router do
     get "/", PageController, :index
     get "/jay", MeController, :index
     get "/jay/:messenger", MeController, :show
+
+    resources "/posts", PostController
   end
 
   # Other scopes may use custom stacks.
