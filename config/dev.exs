@@ -36,8 +36,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :dotcom, Dotcom.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("PG_USERNAME"),
+  password: System.get_env("PG_PASSWORD"),
   database: "dotcom_dev",
-  hostname: "localhost",
+  hostname: System.get)env("PG_HOST"),
   pool_size: 10
