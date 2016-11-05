@@ -2,8 +2,8 @@
 
 # Starting from the official Elixir 1.3.2 image:
 # https://hub.docker.com/_/elixir/
-FROM elixir:1.3.2
-MAINTAINER David Anguita <david@davidanguita.name>
+FROM elixir:1.3.4
+MAINTAINER Jonathan Soifer <me@jonathansoifer.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
