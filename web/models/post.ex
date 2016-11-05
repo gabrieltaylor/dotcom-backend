@@ -5,6 +5,7 @@ defmodule Dotcom.Post do
     field :title, :string
     field :body, :string
 
+    has_many :comments, DotCom.Comment
     timestamps()
   end
 
