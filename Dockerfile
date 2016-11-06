@@ -1,25 +1,22 @@
-# ./Dockerfile
-
-# Starting from the official Elixir 1.3.2 image:
-# https://hub.docker.com/_/elixir/
 FROM elixir:1.3.4
-MAINTAINER Jonathan Soifer <me@jonathansoifer.com>
 
-ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends --force-yes \
+  inotify-tools \
+  apt-transport-https
 
-# Install hex
+# Install node 5.x
+RUN echo "deb https://deb.nodesource.com/node_5.x jessie main" > /etc/apt/sources.list.d/node.list
+
+RUN apt-get update && apt-get install -y --no-install-recommends --force-yes \
+  nodejs
+
+# clean up
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /opt/dotcom
+WORKDIR /opt/dotcom
+
 RUN mix local.hex --force
+RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-1.2.1.ez
 
-# Install rebar
-RUN mix local.rebar --force
-
-# Install the Phoenix framework itself
-RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
-
-# Install NodeJS 6.x and the NPM
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y -q nodejs
-
-# Set /app as workdir
-WORKDIR /app:w
-
+CMD mix phoenix.server
