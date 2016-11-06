@@ -5,6 +5,9 @@ defmodule Dotcom.Post do
   schema "posts" do
     field :title, :string
     field :body, :string
+    field :slug, :string
+    field :serp_title, :string
+    field :serp_description, :string
 
     has_many :comments, Dotcom.Comment
     timestamps()
@@ -15,8 +18,8 @@ defmodule Dotcom.Post do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(params, [:title, :body, :slug, :serp_title, :serp_description])
+    |> validate_required([:title, :body, :slug, :serp_title, :serp_description])
   end
 
   @doc """
