@@ -61,7 +61,7 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 # HEROKU DOESN'T NEED THIS
-# import_config "prod.secriiiet.exs"
+# import_config "prod.secret.exs"
 
 # Heroku Support
 # Configure your database
