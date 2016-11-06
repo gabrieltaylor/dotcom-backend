@@ -3,8 +3,23 @@
 <ul>
 
   <li>
-    <strong>Title:</strong>
+    <strong>Browser Title:</strong>
     <%= @post.title %>
+  </li>
+
+  <li>
+    <strong>Search Engine Result Page Title:</strong>
+    <%= @post.serp_title %>
+  </li>
+
+  <li>
+    <strong>Search Engine Result Page Description:</strong>
+    <%= @post.serp_description %>
+  </li>
+
+  <li>
+    <strong>URL/Slug/Permalink:</strong>
+    <%= @post.slug %>
   </li>
 
   <li>
@@ -20,5 +35,5 @@
 
 </ul>
 
-<%= link "Edit", to: post_path(@conn, :edit, @post) %>
+<%= link "Edit", to: post_path(@conn, :edit, @post) %>&nbsp;
 <%= link "Back", to: post_path(@conn, :index) %>
