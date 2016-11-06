@@ -6,9 +6,27 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :title, class: "control-label" %>
+    <%= label f, "Browser's Window Title", class: "control-label" %>
     <%= text_input f, :title, class: "form-control" %>
     <%= error_tag f, :title %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, "Search Engine Result Page Title", class: "control-label" %>
+    <%= text_input f, :serp_title, class: "form-control" %>
+    <%= error_tag f, :serp_title %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, "Search Engine Result Page Description", class: "control-label" %>
+    <%= text_input f, :serp_description, class: "form-control" %>
+    <%= error_tag f, :serp_description %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, "URL / Slug / Permalink", class: "control-label" %>
+    <%= text_input f, :slug, class: "form-control" %>
+    <%= error_tag f, :slug %>
   </div>
 
   <div class="form-group">

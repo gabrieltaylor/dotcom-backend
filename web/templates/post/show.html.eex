@@ -3,7 +3,7 @@
 <ul>
 
   <li>
-    <strong>Browser Title:</strong>
+    <strong>Browser Window Title:</strong>
     <%= @post.title %>
   </li>
 
