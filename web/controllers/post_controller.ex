@@ -50,8 +50,8 @@ defmodule Dotcom.PostController do
     render(conn, "show.html", post: post, changeset: changeset)
   end
 
-  def edit(conn, %{"slug" => slug}) do
-    post = Repo.get!(Post, slug)
+  def edit(conn, %{"id" => id}) do
+    post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
