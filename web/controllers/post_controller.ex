@@ -44,11 +44,8 @@ defmodule Dotcom.PostController do
     end
   end
 
-  def show(conn, %{"slug" => slug}) do
-    query = from p in Post,
-      where: p.slug == ^slug,
-      select: p
-    post = Repo.one!(query) |> Repo.preload([:comments])
+  def show(conn, %{"id" => id}) do
+    post = Repo.get!(Post, id) |> Repo.preload([:comments])
     changeset = Comment.changeset(%Comment{})
     render(conn, "show.html", post: post, changeset: changeset)
   end

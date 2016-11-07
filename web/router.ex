@@ -20,7 +20,7 @@ defmodule Dotcom.Router do
     get "/jay", MeController, :index
     get "/jay/:messenger", MeController, :show
 
-    resources "/posts", PostController, param: "slug" do
+    resources "/posts", PostController do
       post "/comment", PostController, :add_comment
     end
 
