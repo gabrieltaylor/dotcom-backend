@@ -20,9 +20,14 @@ defmodule Dotcom.Router do
     get "/jay", MeController, :index
     get "/jay/:messenger", MeController, :show
 
-    resources "/posts", PostController do
+    resources "/posts", PostController, param: "slug" do
       post "/comment", PostController, :add_comment
     end
+
+    resources "/:permalink", PostController do
+      post "/comment", PostController, :add_comment
+    end
+
   end
 
   # Other scopes may use custom stacks.

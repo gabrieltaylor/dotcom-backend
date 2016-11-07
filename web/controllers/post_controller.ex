@@ -4,7 +4,18 @@ defmodule Dotcom.PostController do
   alias Dotcom.Post
   alias Dotcom.Comment
 
+  require Logger
+
   plug :scrub_params, "comment" when action in [:add_comment]
+
+  def index(conn, %{"permalink" => permalink}) do
+    query = from p in Post,
+      where: p.slug == ^permalink,
+      select: p
+    post = Repo.one!(query) |> Repo.preload([:comments])
+    changeset = Comment.changeset(%Comment{})
+    render(conn, "show.html", post: post, changeset: changeset)
+  end
 
   def index(conn, _params) do
     posts = Repo.all(Post)
@@ -13,6 +24,7 @@ defmodule Dotcom.PostController do
     #        |> Repo.all
     render(conn, "index.html", posts: posts)
   end
+
 
   def new(conn, _params) do
     changeset = Post.changeset(%Post{})
@@ -32,19 +44,17 @@ defmodule Dotcom.PostController do
     end
   end
 
-  def show(conn, %{"id" => slug}) do
+  def show(conn, %{"slug" => slug}) do
     query = from p in Post,
       where: p.slug == ^slug,
       select: p
-      # post = Repo.one!(query)
     post = Repo.one!(query) |> Repo.preload([:comments])
     changeset = Comment.changeset(%Comment{})
     render(conn, "show.html", post: post, changeset: changeset)
-    # render(conn, "show.html", post: post, changeset: changeset)
   end
 
-  def edit(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id)
+  def edit(conn, %{"slug" => slug}) do
+    post = Repo.get!(Post, slug)
     changeset = Post.changeset(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
