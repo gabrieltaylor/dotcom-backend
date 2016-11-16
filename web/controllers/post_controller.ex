@@ -57,13 +57,19 @@ defmodule Dotcom.PostController do
   def show(conn, %{"id" => id}) do
     post = Repo.get!(Post, id) |> Repo.preload([:comments])
     changeset = Comment.changeset(%Comment{})
-    render(conn, "show.html", post: post, changeset: changeset)
+    # NO TITLE render(conn, "show.html", post: post, changeset: changeset)
+    conn
+    |> assign(:browser_title, "Preview :: #{post.title}")
+    |> render("show.html", post: post, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
-    render(conn, "edit.html", post: post, changeset: changeset)
+    # render(conn, "edit.html", post: post, changeset: changeset)
+    conn
+    |> assign(:browser_title, "Admin :: Edit :: #{post.title}")
+    |> render("edit.html", post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
