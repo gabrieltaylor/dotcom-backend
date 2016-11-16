@@ -14,7 +14,11 @@ defmodule Dotcom.PostController do
       select: p
     post = Repo.one!(query) |> Repo.preload([:comments])
     changeset = Comment.changeset(%Comment{})
-    render(conn, "show.html", post: post, changeset: changeset)
+    # no Title Information
+    # render(conn, "show.html", post: post, changeset: changeset)
+    conn
+    |> assign(:browser_title, post.title)
+    |> render("show.html", post: post, changeset: changeset)
   end
 
   def index(conn, _params) do
@@ -22,7 +26,10 @@ defmodule Dotcom.PostController do
     #posts = Post
     #        |> Post.count_comments
     #        |> Repo.all
-    render(conn, "index.html", posts: posts)
+    # NO TITLE -> render(conn, "index.html", posts: posts)
+    conn
+    |> assign(:browser_title, "Admin :: Listing all available posts")
+    |> render("index.html", posts: posts)
   end
 
 
