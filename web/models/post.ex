@@ -9,7 +9,7 @@ defmodule Dotcom.Post do
     field :serp_title, :string
     field :serp_description, :string
 
-    has_many :comments, Dotcom.Comment
+    has_many :comments, Dotcom.Comment, on_delete: :delete_all
     timestamps()
   end
 
