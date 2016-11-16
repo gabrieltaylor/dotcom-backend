@@ -3,7 +3,11 @@ defmodule Dotcom.PostTest do
 
   alias Dotcom.Post
 
-  @valid_attrs %{body: "some content", title: "some content"}
+  @valid_attrs %{body: "some content",
+                 title: "some content",
+                 slug: "some-slug",
+                 serp_title: "some SERP title",
+                serp_description: "some SERP desc"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
