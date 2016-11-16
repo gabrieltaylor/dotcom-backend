@@ -11,6 +11,12 @@ defmodule Dotcom.PageController do
       where: p.slug == "home",
       select: p
     page = Repo.one!(query)
-    render(conn, "index.html", page: page)
+    # Original Method, no Title Information
+    # render(conn, "index.html", page: page)
+    conn
+    |> assign(:browser_title, page.title)
+    |> render("index.html", page: page)
   end
+
+
 end
