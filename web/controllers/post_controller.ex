@@ -35,7 +35,10 @@ defmodule Dotcom.PostController do
 
   def new(conn, _params) do
     changeset = Post.changeset(%Post{})
-    render(conn, "new.html", changeset: changeset)
+    # NO T render(conn, "new.html", changeset: changeset)
+    conn
+    |> assign(:browser_title, "Admin :: Create new post")
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}) do
