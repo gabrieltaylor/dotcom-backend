@@ -8,25 +8,24 @@ defmodule Dotcom.PostController do
 
   plug :scrub_params, "comment" when action in [:add_comment]
 
+  # Pattern Matching for all slugs in the / path
   def index(conn, %{"permalink" => permalink}) do
+    # Ecto DSL to query the database
     query = from p in Post,
       where: p.slug == ^permalink,
       select: p
     post = Repo.one!(query) |> Repo.preload([:comments])
+    # Includes the Comment model changeset
     changeset = Comment.changeset(%Comment{})
-    # no Title Information
-    # render(conn, "show.html", post: post, changeset: changeset)
+    # Conn is piped for more than one operation
     conn
     |> assign(:browser_title, post.title)
-    |> render("show.html", post: post, changeset: changeset)
+    |> render("show.html", post: post, changeset: changeset, live: :true)
   end
 
+  # Pattern Matching for the /post path
   def index(conn, _params) do
     posts = Repo.all(Post)
-    #posts = Post
-    #        |> Post.count_comments
-    #        |> Repo.all
-    # NO TITLE -> render(conn, "index.html", posts: posts)
     conn
     |> assign(:browser_title, "Admin :: Listing all available posts")
     |> render("index.html", posts: posts)
@@ -50,23 +49,24 @@ defmodule Dotcom.PostController do
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: post_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> assign(:browser_title, "Admin :: Create new post")
+        |> put_flash(:info, "Unable to create post.")
+        |> render("new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
     post = Repo.get!(Post, id) |> Repo.preload([:comments])
     changeset = Comment.changeset(%Comment{})
-    # NO TITLE render(conn, "show.html", post: post, changeset: changeset)
     conn
     |> assign(:browser_title, "Preview :: #{post.title}")
-    |> render("show.html", post: post, changeset: changeset)
+    |> render("show.html", post: post, changeset: changeset, live: :false)
   end
 
   def edit(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
-    # render(conn, "edit.html", post: post, changeset: changeset)
     conn
     |> assign(:browser_title, "Admin :: Edit :: #{post.title}")
     |> render("edit.html", post: post, changeset: changeset)
@@ -82,7 +82,9 @@ defmodule Dotcom.PostController do
         |> put_flash(:info, "Post updated successfully.")
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset)
+        conn
+        |> assign(:browser_title, "Admin :: Edit :: #{post.title}")
+        |> render("edit.html", post: post, changeset: changeset)
     end
   end
 
