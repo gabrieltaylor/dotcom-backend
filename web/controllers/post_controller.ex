@@ -27,14 +27,13 @@ defmodule Dotcom.PostController do
   def index(conn, _params) do
     posts = Repo.all(Post)
     conn
-    |> assign(:browser_title, "Admin :: Listing all available posts")
+    |> assign(:browser_title, "Admin :: Listing Posts")
     |> render("index.html", posts: posts)
   end
 
 
   def new(conn, _params) do
     changeset = Post.changeset(%Post{})
-    # NO T render(conn, "new.html", changeset: changeset)
     conn
     |> assign(:browser_title, "Admin :: Create new post")
     |> render("new.html", changeset: changeset)
