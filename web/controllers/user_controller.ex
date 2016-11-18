@@ -5,12 +5,16 @@ defmodule Dotcom.UserController do
 
   def index(conn, _params) do
     users = Repo.all(User)
-    render(conn, "index.html", users: users)
+    conn
+    |> assign(:browser_title, "Admin :: Listing Users")
+    |> render("index.html", users: users)
   end
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
-    render(conn, "new.html", changeset: changeset)
+    conn
+    |> assign(:browser_title, "Admin :: Create User")
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -22,19 +26,26 @@ defmodule Dotcom.UserController do
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> assign(:browser_title, "Admin :: Create User")
+        |> put_flash(:info, "Unable to create user.")
+        |> render("new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
-    render(conn, "show.html", user: user)
+    conn
+    |> assign(:browser_title, "User :: #{user.username}")
+    |> render("show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
     changeset = User.changeset(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    conn
+    |> assign(:browser_title, "Admin :: Edit :: #{user.username}")
+    |> render("edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
@@ -47,7 +58,9 @@ defmodule Dotcom.UserController do
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        conn
+        |> assign(:browser_title, "Admin :: Edit :: #{user.username}")
+        |> render("edit.html", user: user, changeset: changeset)
     end
   end
 
