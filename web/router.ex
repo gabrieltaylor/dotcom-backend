@@ -24,11 +24,11 @@ defmodule Dotcom.Router do
       post "/comment", PostController, :add_comment
     end
 
+    resources "/users", UserController
+
     resources "/:permalink", PostController do
       post "/comment", PostController, :add_comment
     end
-
-    resources "/users", UserController
 
   end
 
