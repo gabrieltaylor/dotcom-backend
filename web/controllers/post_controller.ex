@@ -31,11 +31,10 @@ defmodule Dotcom.PostController do
     |> render("index.html", posts: posts)
   end
 
-
   def new(conn, _params) do
     changeset = Post.changeset(%Post{})
     conn
-    |> assign(:browser_title, "Admin :: Create new post")
+    |> assign(:browser_title, "Admin :: Create Post")
     |> render("new.html", changeset: changeset)
   end
 
@@ -49,7 +48,7 @@ defmodule Dotcom.PostController do
         |> redirect(to: post_path(conn, :index))
       {:error, changeset} ->
         conn
-        |> assign(:browser_title, "Admin :: Create new post")
+        |> assign(:browser_title, "Admin :: Create User")
         |> put_flash(:info, "Unable to create post.")
         |> render("new.html", changeset: changeset)
     end
