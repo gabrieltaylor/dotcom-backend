@@ -2,7 +2,8 @@ defmodule Dotcom.UserControllerTest do
   use Dotcom.ConnCase
 
   alias Dotcom.User
-  @valid_attrs %{email: "some content", first_name: "some content", last_name: "some content", password_digest: "some content", username: "some content"}
+  @valid_create_attrs %{email: "some@email.com", first_name: "First", last_name: "Last", password: "test1233", password_confirmation: "test1234", username: "UserNamer12"}
+  @valid_attrs %{email: "some@email.com", first_name: "First", last_name: "Last", username: "UserNamer12"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -16,7 +17,7 @@ defmodule Dotcom.UserControllerTest do
   end
 
   test "creates resource and redirects when data is valid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @valid_attrs
+    conn = post conn, user_path(conn, :create), user: @valid_create_attrs
     assert redirected_to(conn) == user_path(conn, :index)
     assert Repo.get_by(User, @valid_attrs)
   end
@@ -46,7 +47,7 @@ defmodule Dotcom.UserControllerTest do
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
     user = Repo.insert! %User{}
-    conn = put conn, user_path(conn, :update, user), user: @valid_attrs
+    conn = put conn, user_path(conn, :update, user), user: @valid_create_attrs
     assert redirected_to(conn) == user_path(conn, :show, user)
     assert Repo.get_by(User, @valid_attrs)
   end
