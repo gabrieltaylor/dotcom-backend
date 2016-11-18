@@ -28,6 +28,8 @@ defmodule Dotcom.Router do
       post "/comment", PostController, :add_comment
     end
 
+    resources "/users", UserController
+
   end
 
   # Other scopes may use custom stacks.
