@@ -70,3 +70,6 @@ config :dotcom, Dotcom.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
+
+# Configure our Password Hashing function
+config :comeonin, bcrypt_log_rounds: 14
