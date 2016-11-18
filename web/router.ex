@@ -26,6 +26,8 @@ defmodule Dotcom.Router do
 
     resources "/users", UserController
 
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
+
     resources "/:permalink", PostController do
       post "/comment", PostController, :add_comment
     end
