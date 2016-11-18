@@ -15,4 +15,10 @@ defmodule Dotcom.UserTest do
     changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  test "password_digest value gets set to a hash" do
+    changeset = User.changeset(%User{}, @valid_attrs)
+    assert get_change(changeset, :password_digest) == "ABCDE"
+  end
+
 end
