@@ -17,3 +17,6 @@ config :dotcom, Dotcom.Repo,
   database: "dotcom_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Configure our Password Hashing function
+config :comeonin, bcrypt_log_rounds: 4
