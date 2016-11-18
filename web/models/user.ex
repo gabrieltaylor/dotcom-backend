@@ -9,6 +9,11 @@ defmodule Dotcom.User do
     field :password_digest, :string
 
     timestamps()
+
+    # Virtual Fields
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
+
   end
 
   @doc """
@@ -16,7 +21,7 @@ defmodule Dotcom.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:first_name, :last_name, :username, :email, :password_digest])
-    |> validate_required([:first_name, :last_name, :username, :email, :password_digest])
+    |> cast(params, [:first_name, :last_name, :username, :email, :password, :password_confirmation])
+    |> validate_required([:first_name, :last_name, :username, :email, :password, :password_confirmation])
   end
 end
