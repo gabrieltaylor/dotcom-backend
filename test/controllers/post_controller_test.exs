@@ -2,7 +2,11 @@ defmodule Dotcom.PostControllerTest do
   use Dotcom.ConnCase
 
   alias Dotcom.Post
-  @valid_attrs %{body: "some content", title: "some content"}
+  @valid_attrs %{title: "some content",
+                  body: "somebody",
+                  slug: "some-slug",
+                  serp_title: "serp title",
+                  serp_description: "serp description"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
