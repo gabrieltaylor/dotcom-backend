@@ -3,7 +3,7 @@ defmodule Dotcom.User do
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   schema "users" do
-    has_many: posts, Dotcom.Post
+    has_many: :posts, Dotcom.Post
     field :first_name, :string
     field :last_name, :string
     field :username, :string
