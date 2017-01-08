@@ -28,9 +28,9 @@ defmodule Dotcom.Router do
 
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
-    resources "/:permalink", PostController do
-      post "/comment", PostController, :add_comment
-    end
+    #resources "/:permalink", PostController do
+    #  post "/comment", PostController, :add_comment
+    #end
 
   end
 

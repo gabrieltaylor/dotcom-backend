@@ -9,7 +9,7 @@ defmodule Dotcom.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/", from: :dotcom, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt 9762D87F761A682492AEC46D865BB951.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

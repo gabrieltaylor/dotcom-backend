@@ -11,6 +11,10 @@
   </head>
 
   <body>
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+    
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
