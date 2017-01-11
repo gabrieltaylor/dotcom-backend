@@ -20,7 +20,11 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css",
+      // REGULAR BRUNCH CODE joinTo: "css/app.css",
+      joinTo: {
+        "css/app.css": /^(web\/static\/css)/,
+        "css/public.css": /^(web\/static\/publicCSS)/
+      },
       order: {
         after: ["web/static/css/app.css"] // concat app.css last
       }
@@ -42,6 +46,7 @@ exports.config = {
     // Dependencies and current project directories to watch
     watched: [
       "web/static",
+      "web/static/publicCSS",
       "test/static"
     ],
 
