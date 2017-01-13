@@ -30,10 +30,10 @@
   <%= render "comments.html", post: @post %>
 
   <li>
-    <%= render "comment_form.html", post: @post, changeset: @changeset, action: post_post_path(@conn, :add_comment, @post) %>
+    <%= render "comment_form.html", post: @post, changeset: @changeset, action: admin_post_post_path(@conn, :add_comment, @post) %>
   </li>
 
 </ul>
 
-<%= link "Edit", to: post_path(@conn, :edit, @post) %>&nbsp;
-<%= link "Back", to: post_path(@conn, :index) %>
+<%= link "Edit", to: admin_post_path(@conn, :edit, @post) %>&nbsp;
+<%= link "Back", to: admin_post_path(@conn, :index) %>

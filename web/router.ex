@@ -13,24 +13,29 @@ defmodule Dotcom.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :public_pages do
+    plug :put_layout, {Dotcom.LayoutView, :public}
+  end
+
   scope "/", Dotcom do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [ :browser, :public_pages ]
 
     get "/", PageController, :index
-    get "/jay", MeController, :index
-    get "/jay/:messenger", MeController, :show
 
-    resources "/posts", PostController do
+    resources "/:permalink", PostController, only: [:index, :show] do
       post "/comment", PostController, :add_comment
     end
 
-    resources "/users", UserController
+  end
 
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
+  # Admin Facing Pages
+  scope "/admin", Dotcom.Admin, as: :admin do
+    pipe_through :browser
 
-    #resources "/:permalink", PostController do
-    #  post "/comment", PostController, :add_comment
-    #end
+    # CRUD for Blog Posts and Associated Comments
+    resources "/posts", PostController do
+      post "/comment", PostController, :add_comment
+    end
 
   end
 
@@ -38,4 +43,5 @@ defmodule Dotcom.Router do
   # scope "/api", Dotcom do
   #   pipe_through :api
   # end
+
 end

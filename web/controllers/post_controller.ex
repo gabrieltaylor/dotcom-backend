@@ -45,7 +45,7 @@ defmodule Dotcom.PostController do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: admin_post_path(conn, :index))
       {:error, changeset} ->
         conn
         |> assign(:browser_title, "Admin :: Create User")
@@ -95,7 +95,7 @@ defmodule Dotcom.PostController do
 
     conn
     |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: post_path(conn, :index))
+    |> redirect(to: admin_post_path(conn, :index))
   end
 
   # Support Comments on Blog Posts
