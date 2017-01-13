@@ -32,7 +32,7 @@ defmodule Dotcom.Router do
   scope "/", Dotcom do
     pipe_through [ :browser, :public_pages ]
 
-    get "/", PageController, :index
+    get "/", PostController, :home
 
     resources "/:permalink", PostController, only: [:index, :show] do
       post "/comment", PostController, :add_comment

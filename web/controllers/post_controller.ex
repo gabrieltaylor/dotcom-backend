@@ -57,4 +57,14 @@ defmodule Dotcom.PostController do
 
   end
 
+  def home(conn, _params) do
+    query = from p in Post,
+    where: p.slug == "home",
+    select: p
+    home = Repo.one!(query)
+    conn
+    |> assign(:browser_title, home.title)
+    |> render("home.html", page: home)
+  end
+
 end
