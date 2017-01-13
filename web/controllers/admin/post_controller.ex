@@ -63,7 +63,7 @@ defmodule Dotcom.Admin.PostController do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post updated successfully.")
-        |> redirect(to: post_path(conn, :show, post))
+        |> redirect(to: admin_post_path(conn, :show, post))
       {:error, changeset} ->
         conn
         |> assign(:browser_title, "Admin :: Edit :: #{post.title}")
