@@ -1,3 +1,3 @@
-defmodule Dotcom.Admin.PostView do
+defmodule Dotcom.PostView do
   use Dotcom.Web, :view
 end
