@@ -93,7 +93,7 @@ defmodule Dotcom.Admin.PostController do
 
       conn
       |> put_flash(:info, "Comment added.")
-      |> redirect(to: post_path(conn, :show, post))
+      |> redirect(to: admin_post_path(conn, :show, post))
 
     else
       render(conn, "show.html", post: post, changeset: changeset)
