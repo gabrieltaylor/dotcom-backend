@@ -3,7 +3,6 @@ defmodule Dotcom.Post do
   import Ecto.Query
 
   schema "posts" do
-    belongs_to :user, Dotcom.User
     field :title, :string
     field :body, :string
     field :slug, :string
