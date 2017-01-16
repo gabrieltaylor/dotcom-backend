@@ -26,6 +26,9 @@ defmodule Dotcom.Router do
       post "/comment", PostController, :add_comment
     end
 
+    # CRUD for Users
+    resources "/users", UserController, only: [:new, :create]
+
   end
 
   # Public Pages
