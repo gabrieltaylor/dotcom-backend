@@ -14,7 +14,7 @@ defmodule Dotcom.Admin.UserController do
 
     changeset = User.changeset(%User{}, user_params)
 
-    case Dotcom.Registration.create(changeset, Dotcom.Repo) do
+    case Dotcom.Authorization.create(changeset, Dotcom.Repo) do
       {:ok, changeset} ->
         conn
         |> put_flash(:info, "Your account was created")
@@ -22,6 +22,7 @@ defmodule Dotcom.Admin.UserController do
       {:error, changeset} ->
         conn
         |> put_flash(:info, "Unable to create account")
+        |> assign(:browser_title, "Admin • Add User")
         |> render("new.html", changeset: changeset)
     end
 
