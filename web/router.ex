@@ -19,26 +19,29 @@ defmodule Dotcom.Router do
 
   # Admin Facing Pages
   scope "/admin", Dotcom.Admin, as: :admin do
+
     pipe_through :browser
 
-    # CRUD for Blog Posts and Associated Comments
-    resources "/posts", PostController do
-      post "/comment", PostController, :add_comment
+    resources "/posts",  PostController do
+      post "/comment",   PostController,     :add_comment
     end
 
-    # CRUD for Users
-    resources "/users", UserController, only: [:new, :create]
+    resources "/users",  UserController,     only: [:new,  :create]
+
+    get "/",             SessionController,  :new
+    post "/",            SessionController,  :create
+    delete "/logout",    SessionController,  :delete
 
   end
 
   # Public Pages
   scope "/", Dotcom do
-    pipe_through [ :browser, :public_pages ]
+    pipe_through [:browser, :public_pages]
 
-    get "/", PostController, :home
+    get "/",                  PostController,     :home
 
     resources "/:permalink", PostController, only: [:index, :show] do
-      post "/comment", PostController, :add_comment
+      post "/comment",        PostController,     :add_comment
     end
 
   end
