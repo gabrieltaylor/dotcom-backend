@@ -22,6 +22,13 @@ defmodule Dotcom.Admin.SessionController do
     end
   end
 
+  def delete(conn, _) do
+    conn
+    |> delete_session(:current_user)
+    |> put_flash(:info, "Logged out")
+    |> redirect(to: "/")
+  end
+
   def current_user(conn) do
     id = Plug.Conn.get_session(conn, :current_user)
     if id, do: Dotcom.Repo.get(User,id)
