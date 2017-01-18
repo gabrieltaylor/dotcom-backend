@@ -5,6 +5,8 @@ defmodule Dotcom.User do
     field :email, :string
     field :crypted_password, :string
     field :password, :string, virtual: true
+
+    has_many :posts, Dotcom.Post
     timestamps()
   end
 

@@ -10,6 +10,7 @@ defmodule Dotcom.Post do
     field :serp_description, :string
 
     has_many :comments, Dotcom.Comment, on_delete: :delete_all
+    belongs_to :user, Dotcom.User
     timestamps()
   end
 
