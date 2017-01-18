@@ -17,6 +17,7 @@ defmodule Dotcom.Admin.UserController do
     case Dotcom.Authorization.create(changeset, Dotcom.Repo) do
       {:ok, changeset} ->
         conn
+        |> put_session(:current_user, changeset.id)
         |> put_flash(:info, "Your account was created")
         |> redirect(to: "/")
       {:error, changeset} ->
