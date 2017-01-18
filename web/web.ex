@@ -52,6 +52,7 @@ defmodule Dotcom.Web do
       import Dotcom.Router.Helpers
       import Dotcom.ErrorHelpers
       import Dotcom.Gettext
+      import Dotcom.Session, only: [current_user: 1, logged_in?: 1]
     end
   end
 
