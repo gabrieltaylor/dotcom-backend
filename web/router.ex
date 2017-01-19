@@ -26,7 +26,7 @@ defmodule Dotcom.Router do
       post "/comment",   PostController,     :add_comment
     end
 
-    resources "/users",  UserController,     only: [:new,  :create]
+    resources "/users",  UserController,     only: [:show, :new, :create]
 
     get "/",             SessionController,  :new
     post "/",            SessionController,  :create

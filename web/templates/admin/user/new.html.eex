@@ -9,7 +9,7 @@
 
   <div class="form-group">
     <label>Name</label>
-    <%= name_input f, :name, class: "form-control" %>
+    <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 

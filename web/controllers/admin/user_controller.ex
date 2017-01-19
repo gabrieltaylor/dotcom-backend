@@ -3,6 +3,13 @@ defmodule Dotcom.Admin.UserController do
 
   alias Dotcom.User
 
+  def show(conn, %{"id" => id}) do
+    user = Repo.get!(User, id)
+    conn
+    |> assign(:browser_title, "Admin • User:")
+    |> render("show.html", user: user)
+  end
+
   def new(conn, _params) do
     changeset = User.changeset(%User{})
     conn
