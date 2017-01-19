@@ -14,13 +14,17 @@ defmodule Dotcom.Post do
     timestamps()
   end
 
+  @required_fields ~w(title slug)a
+  @optional_fields ~w(body serp_title serp_description)a
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body, :slug, :serp_title, :serp_description])
-    |> validate_required([:title, :body, :slug, :serp_title, :serp_description])
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
+    |> assoc_constraint(:user)
   end
 
   @doc """
