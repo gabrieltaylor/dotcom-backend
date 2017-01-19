@@ -49,7 +49,7 @@ defmodule Dotcom.PostController do
 
       conn
       |> put_flash(:info, "Comment added.")
-      |> redirect(to: post_path(conn, :show, post))
+      |> redirect(to: post_path(conn, :index, post.slug))
 
     else
       render(conn, "show.html", post: post, changeset: changeset)
