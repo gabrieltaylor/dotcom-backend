@@ -24,7 +24,7 @@ defmodule Dotcom.User do
     |> validate_required(@required_fields)
     |> unique_constraint(:email)
     |> validate_length(:password, min: 5)
-    |> validate_format(:email, ~r/@/
+    |> validate_format(:email, ~r/@/)
   end
 
 end
