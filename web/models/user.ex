@@ -2,6 +2,7 @@ defmodule Dotcom.User do
   use Dotcom.Web, :model
 
   schema "users" do
+
     field :name, :string
     field :email, :string
     field :crypted_password, :string
